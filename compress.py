@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import struct
 import ctypes
+import time
 
 from itertools import izip_longest
 
@@ -154,14 +155,14 @@ def main():
     numbers = [int(line) for line in file_with_numbers]
 
     gaps = to_gaps(numbers)
-
+'''
     encode_string = simple9_compress(gaps)
 
     result = simple9_uncompress(encode_string)
 
     print(*from_gaps(result), file=open('../simple9_uncompress_numbers.txt', 'w'), sep='\n',
           end='\n')
-
+'''
 
 if __name__ == '__main__':
     main()

@@ -26,7 +26,7 @@ def main():
         document = ' '.join(XPath('.//text()')(document))
 
         words = [word.lower() for word in re.findall(split_regexp, document)]
-        print(*[('%s\t%s' % (word, doc_id)).encode('utf-8') for word in words[:100]], sep='\n')
+        print(*[('%s\t%s' % (word, doc_id)).encode('utf-8') for word in words], sep='\n')
 
 
 if __name__ == '__main__':

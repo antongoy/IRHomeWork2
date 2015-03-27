@@ -2,7 +2,6 @@ from __future__ import print_function
 
 import struct
 import ctypes
-import time
 
 from itertools import izip_longest
 

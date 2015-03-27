@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import sys
 import base64
 import pickle
 import argparse
@@ -28,7 +29,7 @@ def main():
     dictionary = {}
 
     with open('../raw_inverted_index.txt', 'r') as raw_inverted_index_file, \
-         open('../inverted_index.txt', 'w') as inverted_index_file:
+         open('../inverted_index', 'wb') as inverted_index_file:
         for i, line in enumerate(raw_inverted_index_file):
             term, posting_list = line.strip().split('\t')
 

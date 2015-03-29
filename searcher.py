@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
@@ -12,12 +13,14 @@ __author__ = 'anton-goy'
 
 def parse_arguments():
     compression_method = sys.argv[1]
-    filename = sys.argv[2]
+    inverted_index_filename = sys.argv[2]
+    dictionary_filename = sys.argv[3]
+    with_urls_filename = sys.argv[4]
 
     if compression_method == 'varbyte':
-        return varbyte_uncompress, filename
+        return varbyte_uncompress, inverted_index_filename, dictionary_filename, with_urls_filename
     elif compression_method == 'simple9':
-        return simple9_uncompress, filename
+        return simple9_uncompress, inverted_index_filename, dictionary_filename, with_urls_filename
     else:
         raise AttributeError("Wrong compression method")
 
@@ -46,11 +49,11 @@ def intersect_posting_lists(ordinaries_posting_lists, with_not_posting_lists):
 
 
 def main():
-    uncompress, filename_with_urls = parse_arguments()
+    uncompress, inverted_index_filename, dictionary_filename, with_urls_filename = parse_arguments()
 
-    with open('../dictionary', 'rb') as dictionary_file, \
-         open('../inverted_index', 'rb') as inverted_index_file, \
-         open(filename_with_urls) as file_with_urls:
+    with open(dictionary_filename, 'rb') as dictionary_file, \
+         open(inverted_index_filename, 'rb') as inverted_index_file, \
+         open(with_urls_filename) as file_with_urls:
 
         print('Loading dictionary from file....')
         dictionary = load(dictionary_file)

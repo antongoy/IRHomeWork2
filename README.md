@@ -1,9 +1,14 @@
 # IRHomeWork2
 
-Inverted Index Building (MapReduce part): ./mapper.py, ./reducer.py {varbyte, simple9}
+## Inverted Index Building (MapReduce part):##
 
-Dictionary Building: ./build_dictionary.py {file_with_raw_index} {file_with_output_index} {file_with_output_dictionary}
+./mapper.py, ./reducer.py {varbyte, simple9}
 
-Searcher: ./searcher.py {varbyte, simple9} {file_with_index} {file_with_dictionary} {file_with_urls}
+## Dictionary Building: ## 
+./build_dictionary.py {file_with_raw_index} {file_with_output_index} {file_with_output_dictionary}
 
-All compress methods: compress.py
+## Searcher: ##
+ ./searcher.py {varbyte, simple9} {file_with_index} {file_with_dictionary} {file_with_urls}
+
+## All compress methods: ##
+compress.py

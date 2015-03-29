@@ -11,23 +11,35 @@ from compress import *
 
 def parse_arguments():
     compression_method = sys.argv[1]
-    return compression_method
-
-
-def main():
-    compression_method = parse_arguments()
+    raw_inverted_index_filename = sys.argv[2]
+    output_clean_inverted_index = sys.argv[3]
+    output_dictionary_filename = sys.argv[4]
 
     if compression_method == 'varbyte':
-        uncompress = varbyte_uncompress
+        return varbyte_uncompress, \
+               raw_inverted_index_filename, \
+               output_clean_inverted_index, \
+               output_dictionary_filename
     elif compression_method == 'simple9':
-        uncompress = simple9_uncompress
+        return simple9_uncompress, \
+               raw_inverted_index_filename, \
+               output_clean_inverted_index, \
+               output_dictionary_filename
     else:
         raise AttributeError("Wrong compression method")
 
+
+def main():
+    uncompress, \
+    raw_inverted_index_filename, \
+    output_clean_inverted_index, \
+    output_dictionary_filename = parse_arguments()
+
     dictionary = {}
 
-    with open('../raw_inverted_index.txt', 'r') as raw_inverted_index_file, \
-         open('../inverted_index', 'wb') as inverted_index_file:
+    with open(raw_inverted_index_filename, 'r') as raw_inverted_index_file, \
+         open(output_clean_inverted_index, 'wb') as inverted_index_file:
+
         for i, line in enumerate(raw_inverted_index_file):
             term, posting_list = line.strip().split('\t')
 
@@ -39,7 +51,7 @@ def main():
 
             inverted_index_file.write(posting_list)
 
-    with open('../dictionary', 'wb') as dictionary_file:
+    with open(output_dictionary_filename, 'wb') as dictionary_file:
         pickle.dump(dictionary, dictionary_file, 2)
 
 

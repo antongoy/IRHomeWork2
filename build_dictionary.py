@@ -1,30 +1,28 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 
 import sys
 import base64
 import pickle
-import argparse
+
 
 from compress import *
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('compression_method', type=str, choices=['varbyte', 'simple9'])
-
-    args = vars(parser.parse_args())
-    return args['compression_method']
+    compression_method = sys.argv[1]
+    return compression_method
 
 
 def main():
     compression_method = parse_arguments()
 
     if compression_method == 'varbyte':
-        compress = varbyte_compress
         uncompress = varbyte_uncompress
-    else:
-        compress = simple9_compress
+    elif compression_method == 'simple9':
         uncompress = simple9_uncompress
+    else:
+        raise AttributeError("Wrong compression method")
 
     dictionary = {}
 

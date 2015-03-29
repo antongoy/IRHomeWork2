@@ -14,15 +14,13 @@ def varbyte_compress(numbers):
 
 def varbyte_compress_number(number):
     if number < 128:
-        return chr(number + 128)
+        return chr(number ^ 128)
 
     decomposition = []
 
     while number >= 128:
-        remainder = number % 128
+        number, remainder = divmod(number, 128)
         decomposition.append(remainder)
-
-        number //= 128
 
     decomposition.append(number)
     encode_string = b''
@@ -31,7 +29,7 @@ def varbyte_compress_number(number):
         if i != len(decomposition) - 1:
             encode_string += chr(n)
         else:
-            encode_string += chr(n + 128)
+            encode_string += chr(n ^ 128)
 
     return encode_string
 
@@ -147,21 +145,3 @@ def simple9_uncompress(encode_string):
             mask >>= length
 
     return decode_numbers
-
-
-def main():
-    file_with_numbers = open('../numbers.txt', 'r')
-    numbers = [int(line) for line in file_with_numbers]
-
-    gaps = to_gaps(numbers)
-'''
-    encode_string = simple9_compress(gaps)
-
-    result = simple9_uncompress(encode_string)
-
-    print(*from_gaps(result), file=open('../simple9_uncompress_numbers.txt', 'w'), sep='\n',
-          end='\n')
-'''
-
-if __name__ == '__main__':
-    main()

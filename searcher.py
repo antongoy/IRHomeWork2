@@ -37,16 +37,22 @@ def get_posting_list(word):
 
 def intersect_posting_lists(ordinaries_posting_lists, with_not_posting_lists):
     global n_documents
-    doc_ids = list(reduce(lambda x, y: x & y, [set(posting_list) for posting_list in ordinaries_posting_lists]))
+    if ordinaries_posting_lists:
+        doc_ids = list(reduce(lambda x, y: x & y, [set(posting_list) for posting_list in ordinaries_posting_lists]))
+    else:
+        doc_ids = []
 
     # No results for positive results and there are negative results
     if not doc_ids and with_not_posting_lists:
         doc_ids = range(n_documents)
 
     for posting_list in with_not_posting_lists:
-        for doc_id in doc_ids:
-            if doc_id in posting_list:
+        for doc_id in posting_list:
+            if doc_id in doc_ids:
                 doc_ids.remove(doc_id)
+
+    #print(with_not_posting_lists)
+    #print(doc_ids)
 
     return doc_ids
 

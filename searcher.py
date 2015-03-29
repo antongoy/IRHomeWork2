@@ -27,7 +27,7 @@ def parse_arguments():
 
 def get_posting_list(inverted_index_file, dictionary, uncompress_method, word):
     try:
-        frequency, offset, length = dictionary[word]
+        offset, length = dictionary[word]
     except KeyError:
         raise KeyError("There is no the word '%s' in dictionary" % word)
 

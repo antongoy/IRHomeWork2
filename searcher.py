@@ -51,9 +51,6 @@ def intersect_posting_lists(ordinaries_posting_lists, with_not_posting_lists):
             if doc_id in doc_ids:
                 doc_ids.remove(doc_id)
 
-    #print(with_not_posting_lists)
-    #print(doc_ids)
-
     return doc_ids
 
 
